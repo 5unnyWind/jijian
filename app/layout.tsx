@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="min-h-screen  m-6">
+        <div className="min-h-screen p-6 flex flex-col items-center">
           <Logo />
           {children}
           <Tab />

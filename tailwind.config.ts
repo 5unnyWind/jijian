@@ -20,6 +20,9 @@ const config: Config = {
         'tab-bg': 'var(--tab-bg-color)',
         'tab-text': 'var(--tab-text-color)',
         'logo-bg': 'var(--logo-bg)',
+        "bubble-primary": "var(--bubble-primary-color)",
+        "home-primary": "var(--home-primary-color)",
+        "my-primary": "var(--my-primary-color)",
       }
     },
   },
