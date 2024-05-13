@@ -17,15 +17,15 @@ export default function My() {
         />
       </div>
       <section className="max-w-[450px] ml-auto mr-auto">
-        <div className="flex justify-around items-center mt-0">
-          <div className="bg-[#FDC10C] p-3 rounded-lg text-background-end mr-4">
+        <div className="flex justify-between items-center mt-0">
+          <div className="bg-[#FDC10C] p-4 pl-6 pr-6 rounded-lg text-background-end mr-4">
             <div className="text-xs">你已坚持断舍离天数</div>
             <div className="text-xl font-bold ">
               <span className="text-4xl">20</span>
               <div className="ml-4 inline-block -translate-y-0.5">天</div>
             </div>
           </div>
-          <div className="bg-[#FDC10C] p-3 rounded-lg text-background-end">
+          <div className="bg-[#FDC10C] p-4 pl-6 pr-6 rounded-lg text-background-end">
             <div className="text-xs">你已坚持断舍离件数</div>
             <div className="text-xl font-bold ">
               <span className="text-4xl">55</span>
