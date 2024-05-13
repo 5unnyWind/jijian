@@ -6,7 +6,7 @@ export const Logo = () => {
   const path = usePathname();
   const pathDepth = path.split("/").filter((p) => p).length;
   console.log("pathDepth", pathDepth);
-  const showLogo = pathDepth === 1;
+  const showLogo = pathDepth <= 1;
   return (
     <div
       className={clsx(

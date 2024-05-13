@@ -4,8 +4,8 @@ import Link from "next/link";
 export default function My() {
   return (
     <main className="w-full">
-      <div className="relative -ml-6 w-screen -mt-6 -top-[35px] h-48 -z-20  bg-my-primary ">
-        <div className="ml-6 pt-8 relative top-[35px] text-xl">
+      <div className="relative -ml-6 w-screen -mt-6 -top-[35px] h-60 -z-20  bg-my-primary ">
+        <div className="ml-6 pt-12 relative top-[35px] text-2xl">
           HELLO，悲伤的荷包蛋
         </div>
         <Image
