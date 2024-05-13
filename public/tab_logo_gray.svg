@@ -1,4 +1,11 @@
 <svg width="29" height="26" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="28.0864" height="26" rx="8" fill="#C9C9C9"/>
-<rect x="4.0127" y="11.1426" width="20.0617" height="3.71429" rx="1.85714" fill="#242424"/>
+  <style>
+    @media (prefers-color-scheme: dark) {
+    .dark-mode-fill { fill: white; }
+    }
+  </style>
+  <rect width="28.0864" height="26" rx="8" fill="#C9C9C9" />
+  <rect x="4.0127" y="11.1426" width="20.0617" height="3.71429" rx="1.85714" class="dark-mode-fill"
+    fill="#242424" />
 </svg>
+  
