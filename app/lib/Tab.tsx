@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 export const Tab = () => {
   const path = usePathname();
-  console.log(path);
   const isHome = path === "/home";
   const isBubble = path === "/bubble";
   const isMy = path === "/my";

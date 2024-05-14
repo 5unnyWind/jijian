@@ -101,3 +101,8 @@ body {
     text-wrap: balance;
   }
 }
+
+.required::after {
+  content: "*";
+  color: red;
+}
