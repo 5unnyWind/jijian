@@ -20,11 +20,6 @@ export type LoginFormState = {
   };
   message?: string | null;
   success?: boolean;
-  data?: {
-    accessToken: string;
-    refreshToken: string;
-    user: { id: number; username: string; email: string };
-  };
 };
 export async function login(prevState: LoginFormState, formData: FormData) {
   const rawData = {
@@ -84,7 +79,7 @@ export async function login(prevState: LoginFormState, formData: FormData) {
     //   maxAge: 60 * 60 * 24 * 30,
     // });
 
-    await createSession(user.id.toString());
+    await createSession(user.user_id.toString());
   } catch (error) {
     console.error("error", error);
     return { errors: {}, message: "登录失败，请稍后再试" };

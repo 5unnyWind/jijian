@@ -1,18 +1,12 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
-import { unstable_noStore as noStore } from 'next/cache';
+import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: Request) {
   noStore();
-  const listTables = async () => sql`
-    SELECT table_name
-        FROM information_schema.tables
-        WHERE table_schema = 'public'
-        AND table_type = 'BASE TABLE';
-  `;
   const create_users_table = async () => sql`
     CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY,
+      user_id SERIAL PRIMARY KEY,
       username VARCHAR(255) NOT NULL UNIQUE,
       email VARCHAR(255),
       password_hash CHAR(60) NOT NULL
