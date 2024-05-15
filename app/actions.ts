@@ -178,7 +178,7 @@ export async function enroll(
   }
 
   // redirect("/");
-  return { errors: {}, message: "✅注册成功，现在登录吧！", success: true };
+  return { errors: {}, message: "✅ 注册成功，现在登录吧！", success: true };
 }
 
 // 退出登录

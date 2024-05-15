@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { EnrollState, enroll } from "../actions";
 import Image from "next/image";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 import { useActionState, useEffect } from "react";
 import { useToast } from "../lib/toast/use-toast";
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
 
 export default function Enroll() {
   const [state, dispatch] = useFormState<EnrollState, FormData>(enroll, {
@@ -97,14 +98,7 @@ export default function Enroll() {
               {state.errors?.confirm_password?.[0]}
             </p>
           </div>
-          <div>
-            <button
-              type="submit"
-              className="w-full bg-foreground text-background-end mt-4 rounded-full p-2 hover:opacity-80"
-            >
-              注册
-            </button>
-          </div>
+          <Submit />
         </form>
       </section>
       <Image
@@ -117,3 +111,21 @@ export default function Enroll() {
     </main>
   );
 }
+
+const Submit = () => {
+  const { pending } = useFormStatus();
+  return (
+    <div>
+      <button
+        type="submit"
+        aria-disabled={pending}
+        disabled={pending}
+        className={clsx(
+          "w-full bg-foreground text-background-end mt-4 rounded-full p-2 hover:opacity-80"
+        )}
+      >
+        {pending ? "注册中" : "注册"}
+      </button>
+    </div>
+  );
+};
