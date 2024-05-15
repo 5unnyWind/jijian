@@ -184,5 +184,5 @@ export async function enroll(
 // 退出登录
 export async function logout() {
   deleteSession();
-  redirect("/login");
+  redirect("/");
 }
