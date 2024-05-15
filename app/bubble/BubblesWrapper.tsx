@@ -26,46 +26,37 @@ const BubblesWrapper = () => {
     },
   ];
   return (
-    <div className="drop-shadow-md fixed left-[50vw] -translate-x-[50%] bottom-0 w-full h-4/5 max-w-[450px]">
+    <div className="overflow-scroll max-w-[600px] fixed left-[50vw] -translate-x-[50%] top-0 w-[150vw] h-screen">
+      <div className="mt-[40vh]"></div>
       {info.map((item, index) => (
-        <Bubble
-          key={index}
-          position={item.position}
-          gif={item.gif}
-          text={item.text}
-        />
+        <Bubble key={index} gif={item.gif} text={item.text} />
       ))}
+      <div className="mt-40"></div>
     </div>
   );
 };
 
-const Bubble = ({
-  position,
-  gif,
-  text,
-}: {
-  position: [number, number]; // [x,y]
-  gif: string;
-  text: string;
-}) => {
-  const [x, y] = position;
+const Bubble = ({ gif, text }: { gif: string; text: string }) => {
+  const randomWidth = Math.random() * 100 + 220;
+  const randomLeft = Math.random() * 50;
+  const randomTop = Math.random() * 100;
   return (
     <div
       className={clsx(
-        "absolute",
+        "inline-block relative",
         Math.random() > 0.5 ? "animate-bounce-slow1" : "animate-bounce-slow2"
       )}
-      style={{ left: `${x}px`, bottom: `${y}px` }}
+      style={{ left: `${randomLeft}px`, top: `${randomTop}px` }}
     >
       <Image
         className="opacity-90"
         src={gif}
-        height={280}
-        width={280}
+        height={randomWidth}
+        width={randomWidth}
         alt="bubble"
         unoptimized
       />
-      <div className="text-white/90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">
+      <div className="text-ellipsis text-white/90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-semibold">
         {text || ""}
       </div>
     </div>
