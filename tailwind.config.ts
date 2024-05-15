@@ -66,6 +66,11 @@ const config: Config = {
         },
         // --------------------------------
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'bounce-slow1': 'bounce 3s linear infinite',
+        'bounce-slow2': 'bounce 5s linear infinite',
+      }
     },
   },
   plugins: [],
