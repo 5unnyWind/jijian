@@ -1,6 +1,7 @@
 import Image from "next/image";
+import BubblesWrapper from "./BubblesWrapper";
 
-export default function Bubble() {
+export default function Page() {
   return (
     <main className="w-full">
       <Image
@@ -17,29 +18,7 @@ export default function Bubble() {
         width={144}
         alt="极减"
       />
-      <div className="fixed left-[50vw] -translate-x-[50%] bottom-0 w-full h-4/5 opacity-80 max-w-[450px]">
-        <Image
-          className="absolute bottom-28 -left-20"
-          src={"/bubbles/0.gif"}
-          height={280}
-          width={280}
-          alt="bubble"
-        />
-        <Image
-          className="absolute bottom-10 left-48"
-          src={"/bubbles/1.gif"}
-          height={280}
-          width={280}
-          alt="bubble"
-        />
-        <Image
-          className="absolute bottom-60 right-10"
-          src={"/bubbles/2.gif"}
-          height={280}
-          width={280}
-          alt="bubble"
-        />
-      </div>
+      <BubblesWrapper />
     </main>
   );
 }
