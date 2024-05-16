@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <main className="w-full">
+    <main className="w-full" >
       <Image
         className="mt-20"
         src={"/jijian.svg"}
@@ -20,9 +20,7 @@ export default function Page() {
         width={144}
         alt="极减"
       />
-      <Suspense fallback={<>loading...</>}>
-        <BubblesWrapper />
-      </Suspense>
+      <BubblesWrapper />
       <AddBubbleDrawer />
     </main>
   );

@@ -4,7 +4,7 @@ import { unstable_noStore as noStore } from "next/cache";
 
 export async function GET(request: Request) {
   noStore();
-  const create_users_table = async () => sql`
+  const create_table_users = async () => sql`
     CREATE TABLE IF NOT EXISTS users (
       user_id SERIAL PRIMARY KEY,
       username VARCHAR(255) NOT NULL UNIQUE,
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   `;
 
   try {
-    const result = await create_users_table();
+    const result = await create_table_users();
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

@@ -2,7 +2,7 @@ import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
 
 export async function GET(requers: Request) {
-  const create_idle_items_table = async () => sql`
+  const create_table_idle_items = async () => sql`
   CREATE TABLE idle_items (
     item_id SERIAL PRIMARY KEY,    -- 物品ID，自动递增
     item_name VARCHAR(255) NOT NULL,  -- 物品名称
@@ -12,7 +12,7 @@ export async function GET(requers: Request) {
 );
 `;
   try {
-    const result = await create_idle_items_table();
+    const result = await create_table_idle_items();
     return NextResponse.json({ result }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

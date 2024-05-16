@@ -13,10 +13,11 @@ import { Button } from "../lib/Button";
 import Image from "next/image";
 import { Input } from "../lib/Input";
 import { Label } from "../lib/Label";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef } from "react";
 import { ActionState, addItem } from "../actions/items";
 import { useToast } from "../lib/toast/use-toast";
 import { useFormState, useFormStatus } from "react-dom";
+import { mutate } from "swr";
 
 export default function AddBubbleDrawer() {
   return (
@@ -48,6 +49,7 @@ export default function AddBubbleDrawer() {
 
 const AddBubbleForm = () => {
   const { toast } = useToast();
+  const ref = useRef<HTMLButtonElement>(null);
   const [state, formAction] = useFormState<ActionState, FormData>(
     addItem,
     null
@@ -58,6 +60,17 @@ const AddBubbleForm = () => {
       toast({
         title: state.message,
       });
+    if (state?.success) {
+      ref.current?.click();
+      mutate("/api/get_items").then(() => {
+        const bubblesWrapper = document.getElementById("bubbles_wrapper");
+        bubblesWrapper?.scroll({
+          behavior: "smooth",
+          // 滚动到底部
+          top: bubblesWrapper.scrollHeight,
+        });
+      });
+    }
   }, [state]);
 
   return (
@@ -85,7 +98,7 @@ const AddBubbleForm = () => {
           placeholder="请输入数量"
         />
         <Submit />
-        <DrawerClose asChild className="w-full mt-2 mb-2">
+        <DrawerClose ref={ref} asChild className="w-full mt-2 mb-2">
           <Button variant="outline">取消</Button>
         </DrawerClose>
       </form>

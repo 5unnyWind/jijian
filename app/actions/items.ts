@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 export type ActionState = {
   errors?: {};
   message?: string | null;
+  success?: boolean;
 } | null;
 export async function addItem(currentState: ActionState, formData: FormData) {
   try {
@@ -43,9 +44,9 @@ export async function addItem(currentState: ActionState, formData: FormData) {
     };
   }
 
-  revalidatePath("/bubble");
   return {
     errors: {},
     message: "✔️ 添加成功",
+    success: true,
   };
 }
