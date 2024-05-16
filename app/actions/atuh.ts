@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import jwt from "jsonwebtoken";
-import { createSession, deleteSession } from "./lib/session";
+import { createSession, deleteSession } from "../lib/session";
 
 async function hashPassword(password: string) {
   const salt = await bcrypt.genSalt(10); // 生成盐值

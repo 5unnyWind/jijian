@@ -1,34 +1,36 @@
-"use client";
 import Image from "next/image";
 import clsx from "clsx";
-import { Button } from "../lib/Button";
+import { cookies } from "next/headers";
+import { Item } from "../actions/interface";
 
-const BubblesWrapper = () => {
-  const info: {
-    position: [number, number];
+const getItems = async () => {
+  const res = await fetch(process.env.URL + "/api/get_items", {
+    // credentials: "include",
+    // cache: "no-cache",
+    headers: {
+      Cookie: cookies().toString(),
+    },
+  });
+  const data: { items: Item[] } = await res.json();
+  return data;
+};
+
+const BubblesWrapper = async () => {
+  const data = await getItems();
+  const bubblesInfo: {
     gif: string;
     text: string;
-  }[] = [
-    {
-      position: [-80, 40],
-      gif: "/bubbles/0.gif",
-      text: "小时候穿的衬衫",
-    },
-    {
-      position: [200, 40],
-      gif: "/bubbles/1.gif",
-      text: "初中课本",
-    },
-    {
-      position: [40, 240],
-      gif: "/bubbles/2.gif",
-      text: "旧电视机",
-    },
-  ];
+  }[] = data.items.map((item, index) => {
+    return {
+      gif: `/bubbles/${index % 3}.gif`,
+      text: item.item_name,
+    };
+  });
+
   return (
     <div className="overflow-scroll max-w-[600px] fixed left-[50vw] -translate-x-[50%] top-0 w-[150vw] h-screen">
       <div className="mt-[40vh]"></div>
-      {info.map((item, index) => (
+      {bubblesInfo.map((item, index) => (
         <Bubble key={index} gif={item.gif} text={item.text} />
       ))}
       <div className="mt-40"></div>

@@ -3,9 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const someSql = async () => sql`
-  ALTER TABLE users
-  RENAME COLUMN id TO user_id;
-  
+  ALTER TABLE idle_items
+  RENAME COLUMN items_count TO item_count;
   `;
 
   try {

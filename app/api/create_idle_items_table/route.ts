@@ -6,7 +6,7 @@ export async function GET(requers: Request) {
   CREATE TABLE idle_items (
     item_id SERIAL PRIMARY KEY,    -- 物品ID，自动递增
     item_name VARCHAR(255) NOT NULL,  -- 物品名称
-    quantity INT NOT NULL,            -- 物品数量
+    item_count INT NOT NULL,            -- 物品数量
     user_id INT NOT NULL,             -- 对应的用户ID
     is_disposed BOOLEAN NOT NULL      -- 是否已处置，使用布尔值表示
 );

@@ -21,7 +21,7 @@ export async function encrypt(payload: SessionPayload) {
 
 export async function decrypt(session: string | undefined = "") {
   try {
-    const { payload } = await jwtVerify(session, encodedKey, {
+    const { payload } = await jwtVerify<SessionPayload>(session, encodedKey, {
       algorithms: ["HS256"],
     });
     return payload;
@@ -38,7 +38,7 @@ export async function createSession(userId: string) {
     httpOnly: true,
     secure: true,
     expires: expiresAt,
-    sameSite: "lax",
+    // sameSite: "lax",
     path: "/",
   });
 }
@@ -56,7 +56,7 @@ export async function updateSession() {
     httpOnly: true,
     secure: true,
     expires: expires,
-    sameSite: "lax",
+    // sameSite: "lax",
     path: "/",
   });
 }
