@@ -7,6 +7,7 @@ import useSWR from "swr";
 import { useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisposeDrawer from "./DisposeBubbleDrawer";
+import clsx from "clsx";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -58,18 +59,24 @@ const BubblesWrapper = () => {
     ));
   }, [data]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (error || !data) {
-    return <div>Error</div>;
-  }
+  // if (error || !data) {
+  //   return <div>Error</div>;
+  // }
 
   return (
     <>
       <div
+        className={clsx(
+          " glow w-full h-[0px] absolute -bottom-10 transition-opacity duration-1000 ease-out",
+          isLoading ? "opacity-100" : "opacity-0"
+        )}
+      />
+      <div
         id="bubbles_wrapper"
-        className="overflow-scroll max-w-[600px] fixed left-[50vw] -translate-x-[50%] top-0 w-[150vw] h-screen"
+        className={clsx(
+          "overflow-scroll max-w-[600px] fixed left-[50vw] -translate-x-[50%] w-[150vw] h-screen transition-all ease-out duration-1000",
+          isLoading ? "top-[100vh]" : "top-0"
+        )}
       >
         <div className="mt-[40vh]"></div>
         {Bubbles || ""}

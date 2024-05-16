@@ -1,7 +1,6 @@
 import Image from "next/image";
 import BubblesWrapper from "./BubblesWrapper";
 import AddBubbleDrawer from "./AddBubbleDrawer";
-import { Suspense } from "react";
 
 export default function Page() {
   return (
@@ -22,6 +21,7 @@ export default function Page() {
       />
       <BubblesWrapper />
       <AddBubbleDrawer />
+      
     </main>
   );
 }
