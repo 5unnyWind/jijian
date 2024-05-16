@@ -9,7 +9,7 @@ import { flushSync } from "react-dom";
 import DisposeDrawer from "./DisposeBubbleDrawer";
 import clsx from "clsx";
 
-const HOST = process.env.NEXT_PUBLIC_HOST;
+const HOST = process.env.NEXT_PUBLIC_HOST || "";
 
 const fetcher = (url: string) => {
   return fetch(HOST + url).then((res) => res.json());
