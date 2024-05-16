@@ -2,15 +2,50 @@
 
 import clsx from "clsx";
 import Image from "next/image";
+import { useToast } from "../lib/toast/use-toast";
+import { mutate } from "swr";
 
-const Bubble = ({ gif, text }: { gif: string; text: string }) => {
+/**
+ * 1: 丢弃
+ * 2: 二手
+ * 3: 赠予
+ */
+type Disposed_way = 0 | 1 | 2;
+
+const dispose = async (item_id: number, disposed_way: Disposed_way) =>
+  fetch("/api/dispose_item", {
+    method: "POST",
+    body: JSON.stringify({ item_id, disposed_way }),
+  }).then((res) => res.json());
+
+const Bubble = ({
+  gif,
+  text,
+  item_id,
+}: {
+  gif: string;
+  text: string;
+  item_id: number;
+}) => {
   const randomWidth = Math.random() * 100 + 220;
   const randomLeft = Math.random() * 50;
   const randomTop = Math.random() * 100;
+  const { toast } = useToast();
   return (
     <div
       onClick={() => {
-        alert("click" + text);
+        dispose(item_id, 1).then((res: any) => {
+          if (!res.success) {
+            toast({
+              title: res.message,
+            });
+          } else {
+            toast({
+              title: "✅ 成功戳破一个泡泡",
+            });
+            mutate("/api/get_items");
+          }
+        });
       }}
       className={clsx(
         "inline-block relative transition-all duration-300",

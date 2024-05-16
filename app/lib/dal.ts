@@ -17,7 +17,6 @@ export const verifySession = cache(async () => {
   return { isAuth: true, userId: String(session.userId) };
 });
 
-
 export const getUser = cache(async () => {
   const session = await verifySession();
   if (!session) return null;
@@ -33,4 +32,13 @@ export const getUser = cache(async () => {
     console.log("Failed to fetch user");
     return null;
   }
+});
+
+export const getUserId = cache(async () => {
+  const session = cookies().get("session")?.value;
+  const payload = await decrypt(session);
+  if (!session || !payload) {
+    return null;
+  }
+  return payload.userId;
 });

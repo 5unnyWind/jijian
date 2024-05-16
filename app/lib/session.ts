@@ -2,7 +2,7 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
-type SessionPayload = {
+export type SessionPayload = {
   userId: string;
   // username: string;
   expiresAt: Date;
@@ -64,3 +64,5 @@ export async function updateSession() {
 export function deleteSession() {
   cookies().delete("session");
 }
+
+

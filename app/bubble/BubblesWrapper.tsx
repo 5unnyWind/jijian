@@ -30,10 +30,12 @@ const BubblesWrapper = () => {
     return <div>Error</div>;
   }
   const bubblesInfo: {
+    item_id: number;
     gif: string;
     text: string;
   }[] = data.items.map((item, index) => {
     return {
+      item_id: item.item_id,
       gif: `/bubbles/${index % 3}.gif`,
       text: item.item_name,
     };
@@ -43,7 +45,7 @@ const BubblesWrapper = () => {
     <div id="bubbles_wrapper" className="overflow-scroll max-w-[600px] fixed left-[50vw] -translate-x-[50%] top-0 w-[150vw] h-screen">
       <div className="mt-[40vh]"></div>
       {bubblesInfo.map((item, index) => (
-        <Bubble key={index} gif={item.gif} text={item.text} />
+        <Bubble key={index} item_id={item.item_id} gif={item.gif} text={item.text} />
       ))}
       <div className="mt-40"></div>
     </div>
