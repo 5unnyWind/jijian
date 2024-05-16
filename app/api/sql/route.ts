@@ -3,10 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const someSql = async () => sql`
-  -- 更新idle_items表中的is_disposed字段
-  UPDATE idle_items
-  SET is_disposed = TRUE
-  WHERE item_id = 1;
+  ALTER TABLE disposed_items
+  ADD COLUMN moment_sense TEXT;
   `;
 
   try {

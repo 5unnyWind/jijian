@@ -6,7 +6,7 @@ import { db } from "@vercel/postgres";
 
 export async function POST(requet: NextRequest) {
   const body = await requet.json();
-  const { item_id, disposed_way } = body;
+  const { item_id, disposed_way, moment_sense } = body;
   const user_id = await getUserId();
   if (!user_id) {
     return NextResponse.json({ message: "请登录" }, { status: 401 });
@@ -34,8 +34,8 @@ export async function POST(requet: NextRequest) {
     await Promise.all([
       sql`
     -- 插入数据到disposed_items表
-    INSERT INTO disposed_items (user_id, item_id, disposed_way, disposed_at)
-    VALUES (${user_id}, ${item_id}, ${disposed_way}, CURRENT_TIMESTAMP);
+    INSERT INTO disposed_items (user_id, item_id, disposed_way, moment_sense, disposed_at)
+    VALUES (${user_id}, ${item_id}, ${disposed_way},${moment_sense}, CURRENT_TIMESTAMP);
     `,
       sql`
     -- 更新idle_items表中的is_disposed字段
@@ -51,5 +51,8 @@ export async function POST(requet: NextRequest) {
       { status: 500 }
     );
   }
-  return NextResponse.json({ message: "", success: true }, { status: 200 });
+  return NextResponse.json(
+    { message: "✅ 戳破了一个泡泡", success: true },
+    { status: 200 }
+  );
 }

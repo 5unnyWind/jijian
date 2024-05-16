@@ -5,27 +5,18 @@ import Image from "next/image";
 import { useToast } from "../lib/toast/use-toast";
 import { mutate } from "swr";
 
-/**
- * 1: 丢弃
- * 2: 二手
- * 3: 赠予
- */
-type Disposed_way = 0 | 1 | 2;
 
-const dispose = async (item_id: number, disposed_way: Disposed_way) =>
-  fetch("/api/dispose_item", {
-    method: "POST",
-    body: JSON.stringify({ item_id, disposed_way }),
-  }).then((res) => res.json());
 
 const Bubble = ({
   gif,
-  text,
+  item_name,
   item_id,
+  onClick,
 }: {
   gif: string;
-  text: string;
+  item_name: string;
   item_id: number;
+  onClick: () => void;
 }) => {
   const randomWidth = Math.random() * 100 + 220;
   const randomLeft = Math.random() * 50;
@@ -33,20 +24,7 @@ const Bubble = ({
   const { toast } = useToast();
   return (
     <div
-      onClick={() => {
-        dispose(item_id, 1).then((res: any) => {
-          if (!res.success) {
-            toast({
-              title: res.message,
-            });
-          } else {
-            toast({
-              title: "✅ 成功戳破一个泡泡",
-            });
-            mutate("/api/get_items");
-          }
-        });
-      }}
+      onClick={onClick}
       className={clsx(
         "inline-block relative transition-all duration-300",
         Math.random() > 0.5 ? "animate-bounce-slow1" : "animate-bounce-slow2"
@@ -65,7 +43,7 @@ const Bubble = ({
         // style={{ width: `${randomWidth}px` }}
         className="text-white/90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-semibold"
       >
-        {text || ""}
+        {item_name || ""}
       </div>
     </div>
   );
