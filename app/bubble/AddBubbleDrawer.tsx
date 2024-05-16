@@ -16,7 +16,7 @@ import { Label } from "../lib/Label";
 import { useActionState, useEffect } from "react";
 import { ActionState, addItem } from "../actions/items";
 import { useToast } from "../lib/toast/use-toast";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
 
 export default function AddBubbleDrawer() {
   return (
@@ -84,13 +84,23 @@ const AddBubbleForm = () => {
           name="item_count"
           placeholder="请输入数量"
         />
-        <Button className="w-full mt-4 bg-bubble-primary hover:bg-bubble-primar hover:opacity-80">
-          添加
-        </Button>
+        <Submit />
         <DrawerClose asChild className="w-full mt-2 mb-2">
           <Button variant="outline">取消</Button>
         </DrawerClose>
       </form>
     </div>
+  );
+};
+
+const Submit = () => {
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      disabled={pending}
+      className="w-full mt-4 bg-bubble-primary hover:bg-bubble-primar hover:opacity-80"
+    >
+      {pending ? "添加中" : "添加"}
+    </Button>
   );
 };
