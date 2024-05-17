@@ -76,7 +76,7 @@ export default async function My() {
           </div>
         </div>
         <Link
-          href={"/my/discards_list"}
+          href={"/my/disposed_list"}
           className="hover:opacity-80 flex mt-4 text-center p-2 w-full bg-foreground text-background-end rounded-full"
         >
           <span className="ml-auto">查看断舍离清单</span>

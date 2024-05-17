@@ -1,6 +1,6 @@
 "use client";
 
-import { Item } from "../actions/interface";
+import { Item } from "../interface";
 
 import Bubble from "./Bubble";
 import useSWR, { mutate } from "swr";

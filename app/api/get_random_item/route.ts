@@ -2,7 +2,7 @@ import { decrypt } from "@/app/lib/session";
 import { db, sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 import { unstable_noStore as nostore } from "next/cache";
-import { Item } from "@/app/actions/interface";
+import { Item } from "@/app/interface";
 
 export async function GET(request: NextRequest) {
   nostore();

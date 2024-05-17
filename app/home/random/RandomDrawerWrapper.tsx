@@ -1,5 +1,5 @@
 "use client";
-import { Item } from "@/app/actions/interface";
+import { Item } from "@/app/interface";
 import DisposeDrawer from "@/app/bubble/DisposeBubbleDrawer";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Back from "../Back";
 import RandomDrawerWrapper from "./RandomDrawerWrapper";
-import { Item } from "@/app/actions/interface";
+import { Item } from "@/app/interface";
 import Link from "next/link";
 import { getTodayItem, setTodayItem } from "./utils";
 import { useEffect, useState } from "react";
