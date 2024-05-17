@@ -19,15 +19,17 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "text-gradient":
+          "linear-gradient(to bottom, var(--foreground-rgb), rgba(255, 0, 0, 0))",
       },
       colors: {
-        'foreground': 'rgb(var(--foreground-rgb))',
-        'background': 'rgb(var(--background-rgb))',
-        'background-start': 'rgb(var(--background-start-rgb))',
-        'background-end': 'rgb(var(--background-end-rgb))',
-        'tab-bg': 'var(--tab-bg-color)',
-        'tab-text': 'var(--tab-text-color)',
-        'logo-bg': 'var(--logo-bg)',
+        foreground: "rgb(var(--foreground-rgb))",
+        background: "rgb(var(--background-rgb))",
+        "background-start": "rgb(var(--background-start-rgb))",
+        "background-end": "rgb(var(--background-end-rgb))",
+        "tab-bg": "var(--tab-bg-color)",
+        "tab-text": "var(--tab-text-color)",
+        "logo-bg": "var(--logo-bg)",
         "bubble-primary": "var(--bubble-primary-color)",
         "home-primary": "var(--home-primary-color)",
         "my-primary": "var(--my-primary-color)",
@@ -67,10 +69,10 @@ const config: Config = {
         // --------------------------------
       },
       animation: {
-        'spin-slow': 'spin 3s linear infinite',
-        'bounce-slow1': 'bounce 3s linear infinite',
-        'bounce-slow2': 'bounce 5s linear infinite',
-      }
+        "spin-slow": "spin 3s linear infinite",
+        "bounce-slow1": "bounce 3s linear infinite",
+        "bounce-slow2": "bounce 5s linear infinite",
+      },
     },
   },
   plugins: [],

@@ -119,3 +119,14 @@ body {
     box-shadow: 0 0 20px transparent; /* 发光颜色在中间时刻 */
   }
 }
+
+.text-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--foreground-rgb)),
+    rgba(255, 0, 0, 0)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}

@@ -4,6 +4,7 @@ import { getUser } from "../lib/dal";
 import { Suspense } from "react";
 import { Skeleton } from "../lib/Skeleton";
 import { sql } from "@vercel/postgres";
+import { Button } from "../lib/Button";
 
 export default async function My() {
   const UserName = async () => {
@@ -75,19 +76,26 @@ export default async function My() {
             </div>
           </div>
         </div>
-        <Link
-          href={"/my/disposed_list"}
-          className="hover:opacity-80 flex mt-4 text-center p-2 w-full bg-foreground text-background-end rounded-full"
-        >
-          <span className="ml-auto">查看断舍离清单</span>
-          <Image
-            className="ml-auto"
-            src={"/arrow.svg"}
-            width={21}
-            height={10}
-            alt="arrow"
-          />
-        </Link>
+        <Button className="w-full rounded-full mt-10">
+          <Link
+            href={"/my/disposed_list"}
+            className="hover:opacity-80 flex text-center "
+          >
+            <span className="ml-auto">查看断舍离清单 </span>
+            <Image
+              className="ml-auto"
+              src={"/arrow.svg"}
+              width={21}
+              height={10}
+              alt="arrow"
+            />
+          </Link>
+        </Button>
+
+        <Button className="w-full rounded-full mt-2">
+          <Link href={"/my/about_us"}>关于极减</Link>
+        </Button>
+
       </section>
     </main>
   );
