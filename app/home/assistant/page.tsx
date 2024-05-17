@@ -18,7 +18,7 @@ export default function Assistant() {
         </Avatar>
         <span className="ml-2 text-lg font-semibold">小助手</span>
       </div>
-      <div className="mt-8 flex flex-col">
+      <div className="mt-8 flex flex-col max-w-[450px] mx-auto">
         <span className="bg-[#EBEBEB] p-3 mr-10 rounded-xl mt-4 text-black">
           您好，我是您的私人断舍离助手。可以询问我任何您纠结是否要断舍离的物品，我会给予您最科学的建议。
         </span>
@@ -26,10 +26,12 @@ export default function Assistant() {
           我收集的快递盒子要扔掉吗？
         </span>
       </div>
-      <div className="fixed bottom-10 flex w-11/12 items-center space-x-2 drop-shadow-lg">
+      <div className="fixed bottom-10 flex w-11/12 items-center space-x-2 drop-shadow-lg max-w-[450px] left-1/2 -translate-x-1/2">
         <Input className="rounded-full p-3 h-12" />
         <Button
-          onClick={() => {toast({title:'🤖 需要提供 API KEY'})}}
+          onClick={() => {
+            toast({ title: "🤖 需要提供 API KEY" });
+          }}
           className="w-12 h-8 p-2 rounded-full absolute right-2 top-1/2 -translate-y-1/2"
         >
           <Image

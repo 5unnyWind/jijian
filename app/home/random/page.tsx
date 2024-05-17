@@ -39,7 +39,7 @@ export default function Random() {
   return (
     <main className="w-full flex flex-col">
       <Back />
-      <div className="flex flex-col items-center mt-10">
+      <div className="flex flex-col items-center mt-10 max-w-[450px] mx-auto">
         <div className="text-3xl font-semibold">每天随机“扔”一件</div>
         <div className="mt-2">每天一件，烦恼再见</div>
         <Image
