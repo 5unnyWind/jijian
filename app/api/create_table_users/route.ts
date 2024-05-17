@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const create_table_users = async () => sql`
     CREATE TABLE IF NOT EXISTS users (
       user_id SERIAL PRIMARY KEY,
-      username VARCHAR(255) NOT NULL UNIQUE,
+      user_name VARCHAR(255) NOT NULL UNIQUE,
       email VARCHAR(255),
       password_hash CHAR(60) NOT NULL
     );

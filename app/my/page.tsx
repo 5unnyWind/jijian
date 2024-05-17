@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { Skeleton } from "../lib/Skeleton";
 import { sql } from "@vercel/postgres";
 import { Button } from "../lib/Button";
+import { logout } from "../actions/atuh";
 
 export default async function My() {
   const UserName = async () => {
@@ -95,7 +96,11 @@ export default async function My() {
         <Button className="w-full rounded-full mt-2">
           <Link href={"/my/about_us"}>关于极减</Link>
         </Button>
-
+        <form action={logout}>
+          <Button variant={"destructive"} className="w-full rounded-full mt-2">
+            退出登录
+          </Button>
+        </form>
       </section>
     </main>
   );

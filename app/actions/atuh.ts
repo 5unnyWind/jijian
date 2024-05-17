@@ -37,7 +37,7 @@ export async function login(prevState: LoginFormState, formData: FormData) {
 
   try {
     const getUser = async () => sql`
-  SELECT * FROM users WHERE username = ${rawData.username};
+  SELECT * FROM users WHERE user_name = ${rawData.username};
   `;
     const user = (await getUser()).rows[0];
 
@@ -146,7 +146,7 @@ export async function enroll(
 
   //检查用户名是否已经存在
   const checkUser = async () => sql`
-  SELECT * FROM users WHERE username = ${data.username};
+  SELECT * FROM users WHERE user_name = ${data.username};
   `;
   const user = await checkUser();
   if (user.rows.length) {
@@ -159,7 +159,7 @@ export async function enroll(
   const hashedPassword = await hashPassword(data.password);
 
   const insert = async () => sql`
-  INSERT INTO users (username, email, password_hash) VALUES (${data.username}, ${data.email}, ${hashedPassword});
+  INSERT INTO users (user_name, email, password_hash) VALUES (${data.username}, ${data.email}, ${hashedPassword});
   `;
 
   try {
