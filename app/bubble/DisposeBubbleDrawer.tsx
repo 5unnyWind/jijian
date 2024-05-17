@@ -35,8 +35,13 @@ const dispose = async (
 
 const DisposeDrawer = forwardRef<
   HTMLButtonElement,
-  { item_id: number; item_name: string }
->(({ item_id, item_name }, ref) => {
+  {
+    item_id: number;
+    item_name: string;
+    triggerElement?: JSX.Element;
+    onSuccess?: () => void;
+  }
+>(({ item_id, item_name, triggerElement = "", onSuccess }, ref) => {
   const [disposed_way, set_disposed_way] = useState(1);
   const [moment_sense, set_moment_sense] = useState("");
   const drawerCloseRef = useRef<HTMLButtonElement>(null);
@@ -51,13 +56,16 @@ const DisposeDrawer = forwardRef<
         });
       if (res.success) {
         drawerCloseRef.current?.click();
+        onSuccess?.();
       }
       setLoading(false);
     });
   };
   return (
     <Drawer>
-      <DrawerTrigger ref={ref} className=""></DrawerTrigger>
+      <DrawerTrigger ref={ref} className="w-full">
+        {triggerElement}
+      </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>戳破一个泡泡?</DrawerTitle>

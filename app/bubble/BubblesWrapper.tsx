@@ -3,7 +3,7 @@
 import { Item } from "../actions/interface";
 
 import Bubble from "./Bubble";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisposeDrawer from "./DisposeBubbleDrawer";
@@ -89,6 +89,9 @@ const BubblesWrapper = () => {
           ""
         }
         ref={drawerTrigerRef}
+        onSuccess={() => {
+          mutate("/api/get_items");
+        }}
       />
     </>
   );

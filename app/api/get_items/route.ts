@@ -1,10 +1,10 @@
 import { decrypt } from "@/app/lib/session";
 import { sql } from "@vercel/postgres";
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as nostore } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  noStore();
+  nostore();
   try {
     const session = request.cookies.get("session")?.value;
     if (!session) {
