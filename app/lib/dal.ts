@@ -23,13 +23,13 @@ export const getUser = cache(async () => {
 
   try {
     const data =
-      await sql`SELECT user_id,user_name,email FROM users WHERE id = ${session.userId}; `;
+      await sql`SELECT user_id,user_name,email FROM users WHERE user_id = ${session.userId}; `;
 
     const user = data.rows[0];
 
     return user;
   } catch (error) {
-    console.log("Failed to fetch user");
+    console.log("Failed to fetch user", error);
     return null;
   }
 });
