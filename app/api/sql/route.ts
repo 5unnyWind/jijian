@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const someSql = async () => sql`
-  ALTER TABLE disposed_items
-  ADD COLUMN moment_sense TEXT;
+  ALTER TABLE users
+  RENAME COLUMN username TO user_name;
   `;
 
   try {
