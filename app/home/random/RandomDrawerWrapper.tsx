@@ -1,12 +1,10 @@
 "use client";
 import { Item } from "@/app/actions/interface";
 import DisposeDrawer from "@/app/bubble/DisposeBubbleDrawer";
-import { Button } from "@/app/lib/Button";
 import clsx from "clsx";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { getTodayItem, setTodayItem } from "./utils";
+import { setTodayItem } from "./utils";
 
 const RandomDrawerWrapper = ({ item }: { item: Item }) => {
   const router = useRouter();

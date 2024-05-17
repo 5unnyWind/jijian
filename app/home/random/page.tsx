@@ -6,6 +6,8 @@ import { Item } from "@/app/actions/interface";
 import Link from "next/link";
 import { getTodayItem, setTodayItem } from "./utils";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/app/lib/Skeleton";
+import Loading from "@/app/lib/Loading";
 
 const HOST = process.env.NEXT_PUBLIC_HOST;
 
@@ -34,11 +36,10 @@ export default function Random() {
     }
   }, []);
 
-  if (isLoading) return <Skeleton />;
-
   return (
     <main className="w-full flex flex-col">
       <Back />
+
       <div className="flex flex-col items-center mt-10 max-w-[450px] mx-auto">
         <div className="text-3xl font-semibold">每天随机“扔”一件</div>
         <div className="mt-2">每天一件，烦恼再见</div>
@@ -49,29 +50,37 @@ export default function Random() {
           width={326}
           height={100}
         />
-        <div className="-mt-8 text-xl font-semibold bg-[#FECC01] w-full text-center pt-16 pb-16 rounded-lg">
-          {item?.item_name || (
-            <>
-              暂无物品，去
-              <Link
-                className="underline underline-offset-4 text-blue-400"
-                href={"/bubble"}
-              >
-                添加泡泡
-              </Link>
-              吧！
-            </>
-          )}
-        </div>
+        {
+          <div className="-mt-8 text-xl font-semibold bg-[#FECC01] w-full text-center pt-16 pb-16 rounded-lg">
+            {isLoading ? (
+              <>
+                <Loading className="inline-block" />
+                挑选中...
+              </>
+            ) : (
+              item?.item_name || (
+                <>
+                  暂无物品，去
+                  <Link
+                    className="underline underline-offset-4 text-blue-400"
+                    href={"/bubble"}
+                  >
+                    添加泡泡
+                  </Link>
+                  吧！
+                </>
+              )
+            )}
+          </div>
+        }
         <div className="mt-4"></div>
-        {item !== undefined && item !== null && (
-          <RandomDrawerWrapper item={item} />
+        {isLoading ? (
+          <Skeleton className="w-full rounded-full h-10" />
+        ) : (
+          item !== undefined &&
+          item !== null && <RandomDrawerWrapper item={item} />
         )}
       </div>
     </main>
   );
 }
-
-const Skeleton = () => {
-  return <>Loading...</>;
-};
