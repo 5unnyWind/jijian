@@ -13,7 +13,9 @@ import { useToast } from "../lib/toast/use-toast";
 const HOST = process.env.NEXT_PUBLIC_HOST || "";
 
 const fetcher = (url: string) => {
-  return fetch(HOST + url).then((res) => res.json());
+  return fetch(HOST + url, {
+    credentials: "include",
+  }).then((res) => res.json());
 };
 
 const BubblesWrapper = () => {
@@ -57,7 +59,7 @@ const BubblesWrapper = () => {
   useEffect(() => {
     data?.message && toast({ title: data.message });
   }, [data]);
-  
+
   // if (error || !data) {
   //   return <div>Error</div>;
   // }
