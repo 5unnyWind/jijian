@@ -103,7 +103,7 @@ const ListWrapper = async () => {
             {/* <RocketIcon className="h-4 w-4" /> */}
             <PlusIcon />
             <AlertTitle>暂无记录</AlertTitle>
-            <AlertDescription>去添加泡泡</AlertDescription>
+            <AlertDescription>去戳破泡泡</AlertDescription>
           </Alert>
         </Link>
       )}

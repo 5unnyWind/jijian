@@ -72,6 +72,7 @@ const config: Config = {
         "spin-slow": "spin 3s linear infinite",
         "bounce-slow1": "bounce 3s linear infinite",
         "bounce-slow2": "bounce 5s linear infinite",
+        'pulse-3times': 'pulse 1.5s linear 3',
       },
     },
   },

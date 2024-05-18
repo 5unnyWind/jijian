@@ -79,6 +79,11 @@ const BubblesWrapper = () => {
           isLoading ? "opacity-100" : "opacity-0"
         )}
       />
+      {!isLoading && bubblesInfo?.length !== 0 && (
+        <div className="animate-pulse-3times opacity-0 text-sm">
+          泡泡🫧可以戳破！
+        </div>
+      )}
       <div
         id="bubbles_wrapper"
         className={clsx(

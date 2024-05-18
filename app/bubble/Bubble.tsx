@@ -15,7 +15,7 @@ const Bubble = ({
   item_id: number;
   onClick: () => void;
 }) => {
-  const randomWidth = Math.random() * 100 + 220;
+  const randomWidth = Math.random() * 100 + 200;
   const randomLeft = Math.random() * 50;
   const randomTop = Math.random() * 100;
   const { toast } = useToast();
@@ -38,7 +38,7 @@ const Bubble = ({
       />
       <div
         // style={{ width: `${randomWidth}px` }}
-        className="text-white/90 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-semibold"
+        className="text-white/80 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-semibold"
       >
         {item_name || ""}
       </div>
