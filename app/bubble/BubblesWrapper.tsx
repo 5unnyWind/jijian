@@ -75,7 +75,7 @@ const BubblesWrapper = () => {
     <>
       <div
         className={clsx(
-          " glow w-full h-[0px] absolute -bottom-10 transition-opacity duration-1000 ease-out",
+          "glow w-3/4 h-[0px] left-1/2 -translate-x-1/2 absolute -bottom-10 transition-opacity duration-1000 ",
           isLoading ? "opacity-100" : "opacity-0"
         )}
       />

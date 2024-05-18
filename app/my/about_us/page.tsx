@@ -73,6 +73,10 @@ export default function Page() {
       >
         <BackLinkWithCheckNewUser />
       </Suspense>
+
+      <div className="text-xs text-center text-background-end  mt-4 ">
+        DEV. tf , UI wj , PM lj
+      </div>
     </main>
   );
 }
