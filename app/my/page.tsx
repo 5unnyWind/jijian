@@ -77,7 +77,7 @@ export default async function My() {
             </div>
           </div>
         </div>
-        <Button className="w-full rounded-full mt-10">
+        <Button asChild className="w-full rounded-full mt-10">
           <Link
             href={"/my/disposed_list"}
             className="hover:opacity-80 flex text-center "
@@ -93,7 +93,7 @@ export default async function My() {
           </Link>
         </Button>
 
-        <Button className="w-full rounded-full mt-2">
+        <Button asChild className="w-full rounded-full mt-2">
           <Link href={"/my/about_us"}>关于极减</Link>
         </Button>
         <form action={logout}>
