@@ -31,6 +31,7 @@ export default function AddBubbleDrawer() {
         <DrawerHeader>
           <DrawerTitle>添加一个泡泡?</DrawerTitle>
           <DrawerDescription>
+            <span>（记录一项闲置物品）</span>
             <Image
               className="ml-auto mr-auto"
               src={"/add_bubble_head.svg"}
@@ -84,7 +85,7 @@ const AddBubbleForm = () => {
               'url("/add_bubble_name_icon.svg") no-repeat scroll 9px 9px',
           }}
           name="item_name"
-          placeholder="请输入物品名称"
+          placeholder="例如：旧杂志"
         />
         {/* 数量 */}
         <Label htmlFor="item_count">数量</Label>
@@ -95,7 +96,8 @@ const AddBubbleForm = () => {
               'url("/add_bubble_count_icon.svg") no-repeat scroll 12px 12px',
           }}
           name="item_count"
-          placeholder="请输入数量"
+          placeholder="例如：1"
+          type="number"
         />
         <Submit />
         <DrawerClose ref={ref} asChild className="w-full mt-2 mb-2">

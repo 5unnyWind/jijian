@@ -48,7 +48,7 @@ export default function Enroll() {
           <input
             name="username"
             type="text"
-            placeholder="请输入账号"
+            placeholder="账号：至少两位，中英文皆可"
             className="bg-transparent outline-none border-2 border-foreground w-full rounded-full p-1 pl-4"
             aria-describedby="username-error"
           />
@@ -59,7 +59,7 @@ export default function Enroll() {
           </div>
           <input
             name="email"
-            placeholder="请输入邮箱"
+            placeholder="邮箱：可选，用于找回密码"
             className="mt-2 bg-transparent outline-none border-2  border-foreground w-full rounded-full p-1 pl-4"
             aria-describedby="email-error"
           />
@@ -68,11 +68,11 @@ export default function Enroll() {
               {state.errors?.email?.[0]}
             </p>
           </div>
-          <div className=" mt-2 "></div>
+          <div className=" mt-1 "></div>
           <input
             name="password"
             type="password"
-            placeholder="请输入密码"
+            placeholder="密码：至少8位"
             className="mt-2 bg-transparent outline-none border-2  border-foreground w-full rounded-full p-1 pl-4"
             aria-describedby="password-error"
           />
@@ -85,7 +85,7 @@ export default function Enroll() {
           <input
             name="confirm_password"
             type="password"
-            placeholder="请确认密码"
+            placeholder="确认密码：再输入一次"
             className="mt-2 bg-transparent outline-none border-2  border-foreground w-full rounded-full p-1 mb-2 pl-4"
             aria-describedby="confirm_password-error"
           />
