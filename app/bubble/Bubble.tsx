@@ -3,9 +3,6 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useToast } from "../lib/toast/use-toast";
-import { mutate } from "swr";
-
-
 
 const Bubble = ({
   gif,
