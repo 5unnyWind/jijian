@@ -4,10 +4,11 @@ import { Item } from "../interface";
 
 import Bubble from "./Bubble";
 import useSWR, { mutate } from "swr";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisposeDrawer from "./DisposeBubbleDrawer";
 import clsx from "clsx";
+import { useToast } from "../lib/toast/use-toast";
 
 const HOST = process.env.NEXT_PUBLIC_HOST || "";
 
@@ -16,20 +17,13 @@ const fetcher = (url: string) => {
 };
 
 const BubblesWrapper = () => {
-  const { data, error, isLoading } = useSWR<{ items: Item[] }>(
-    "/api/get_items",
-    fetcher
-  );
+  const { data, error, isLoading } = useSWR<{
+    items: Item[];
+    message?: string;
+  }>("/api/get_items", fetcher);
   const [selectItem, setSelectItem] = useState<number | null>(null);
 
   const drawerTrigerRef = useRef<HTMLButtonElement>(null);
-
-  const handleBubbleClick = (item_id: number) => {
-    flushSync(() => {
-      setSelectItem(item_id);
-    });
-    drawerTrigerRef.current?.click();
-  };
 
   const bubblesInfo:
     | {
@@ -58,10 +52,22 @@ const BubblesWrapper = () => {
       />
     ));
   }, [data]);
+  const { toast } = useToast();
 
+  useEffect(() => {
+    data?.message && toast({ title: data.message });
+  }, [data]);
+  
   // if (error || !data) {
   //   return <div>Error</div>;
   // }
+
+  const handleBubbleClick = (item_id: number) => {
+    flushSync(() => {
+      setSelectItem(item_id);
+    });
+    drawerTrigerRef.current?.click();
+  };
 
   return (
     <>
