@@ -5,7 +5,8 @@ import { Tab } from "./lib/Tab";
 import { Logo } from "./lib/Logo";
 import { Toaster } from "./lib/toast/Toaster";
 import type { Viewport } from "next";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         </div>
         <Toaster />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
