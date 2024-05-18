@@ -4,13 +4,21 @@ import "./globals.css";
 import { Tab } from "./lib/Tab";
 import { Logo } from "./lib/Logo";
 import { Toaster } from "./lib/toast/Toaster";
+import type { Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+};
 export const metadata: Metadata = {
-  title: "jijian",
+  title: "极减",
   description: "RELAX YOUR LIFE.",
-  viewport: "width=device-width, initial-scale=1,user-scalable=no",
 };
 
 export default function RootLayout({

@@ -4,9 +4,9 @@ import AddBubbleDrawer from "./AddBubbleDrawer";
 
 export default function Page() {
   return (
-    <main className="w-full" >
+    <main className="w-full">
       <Image
-        className="mt-20"
+        className="mt-20 text-pink"
         src={"/jijian.svg"}
         height={65}
         width={144}
@@ -17,11 +17,10 @@ export default function Page() {
         src={"/slogan.svg"}
         height={65}
         width={144}
-        alt="极减"
+        alt="物质极“减” 精神极简"
       />
       <BubblesWrapper />
       <AddBubbleDrawer />
-      
     </main>
   );
 }
