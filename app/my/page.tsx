@@ -1,39 +1,41 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getUser } from "../lib/dal";
+import { getUser, getUserId } from "../lib/dal";
 import { Suspense } from "react";
 import { Skeleton } from "../lib/Skeleton";
 import { sql } from "@vercel/postgres";
 import { Button } from "../lib/Button";
 import { logout } from "../actions/atuh";
 
-export default async function My() {
-  const UserName = async () => {
-    const user = await getUser();
-    return <span>{user?.user_name || ""}</span>;
-  };
+const DisposedDaysCount = async () => {
+  const userId = await getUserId();
+  const result = await sql`
+  SELECT DISTINCT DATE(disposed_at) as disposed_date
+  FROM disposed_items
+  WHERE user_id = ${userId};`;
+  return <span className="text-4xl">{result.rowCount}</span>;
+};
 
-  const DisposedDaysCount = async () => {
-    const result = await sql`
-    SELECT DISTINCT DATE(disposed_at) as disposed_date
-    FROM disposed_items
-    WHERE user_id = 1;`;
-    return <span className="text-4xl">{result.rowCount}</span>;
-  };
+const DisposedItemsCount = async () => {
+  const userId = await getUserId();
+  const result = await sql`
+  SELECT COUNT(*) as disposed_items_count
+  FROM disposed_items
+  WHERE user_id = ${userId};`;
+  return (
+    <span className="text-4xl">{result.rows[0]?.disposed_items_count}</span>
+  );
+};
 
-  const DisposedItemsCount = async () => {
-    const result = await sql`
-    SELECT COUNT(*) as disposed_items_count
-    FROM disposed_items
-    WHERE user_id = 1;`;
-    return (
-      <span className="text-4xl">{result.rows[0]?.disposed_items_count}</span>
-    );
-  };
+const UserName = async () => {
+  const user = await getUser();
+  return <span>{user?.user_name || ""}</span>;
+};
 
+export default function Page() {
   return (
     <main className="w-full">
-      <div className="relative -ml-6 w-screen -mt-6 -top-[35px] h-60 -z-20  bg-my-primary ">
+      <div className=" rounded-t-2xl relative -ml-6 w-screen -mt-6 -top-[35px] h-60 -z-20  bg-my-primary ">
         <div className="ml-6 pt-12 relative top-[35px] text-2xl">
           HELLO，
           <Suspense fallback={<Skeleton className="inline-block w-32 h-5 " />}>

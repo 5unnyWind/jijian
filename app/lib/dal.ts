@@ -35,10 +35,5 @@ export const getUser = cache(async () => {
 });
 
 export const getUserId = cache(async () => {
-  const session = cookies().get("session")?.value;
-  const payload = await decrypt(session);
-  if (!session || !payload) {
-    return null;
-  }
-  return payload.userId;
+  return (await verifySession()).userId;
 });

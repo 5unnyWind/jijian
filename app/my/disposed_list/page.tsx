@@ -9,6 +9,8 @@ import { Separator } from "@/app/lib/Separator";
 import { Badge } from "@/app/lib/Badge";
 import clsx from "clsx";
 import { Skeleton } from "@/app/lib/Skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/app/lib/Alert";
+import { PlusIcon } from "@radix-ui/react-icons";
 
 export default function Page() {
   return (
@@ -63,7 +65,8 @@ export default function Page() {
                 <Skeleton className="w-24 h-3 mt-1" />
               </div>
               <Skeleton className="w-10 h-10" />
-            </div>            <Separator className="mt-1" />
+            </div>
+            <Separator className="mt-1" />
             <div className="flex flex-row justify-between items-center mt-4 opacity-20">
               <div className="flex flex-col text-md font-semibold">
                 <Skeleton className="w-24 h-4" />
@@ -92,9 +95,18 @@ const ListWrapper = async () => {
   const disposed_list = result.rows.reverse();
   return (
     <>
-      {disposed_list.map((item) => (
-        <Item key={item.item_id} item={item} />
-      ))}
+      {disposed_list.length ? (
+        disposed_list.map((item) => <Item key={item.item_id} item={item} />)
+      ) : (
+        <Link href={"/bubble"}>
+          <Alert className="mt-10">
+            {/* <RocketIcon className="h-4 w-4" /> */}
+            <PlusIcon />
+            <AlertTitle>暂无记录</AlertTitle>
+            <AlertDescription>去添加泡泡</AlertDescription>
+          </Alert>
+        </Link>
+      )}
     </>
   );
 };

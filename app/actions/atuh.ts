@@ -127,42 +127,41 @@ export async function enroll(
       message: "两次密码不一致",
       path: ["confirm_password"],
     });
+  try {
+    const result = schema.safeParse({
+      username: formData.get("username"),
+      email: formData.get("email") || undefined,
+      password: formData.get("password"),
+      confirm_password: formData.get("confirm_password"),
+    });
 
-  const result = schema.safeParse({
-    username: formData.get("username"),
-    email: formData.get("email") || undefined,
-    password: formData.get("password"),
-    confirm_password: formData.get("confirm_password"),
-  });
+    if (!result.success) {
+      return {
+        errors: result.error.flatten().fieldErrors,
+        message: "",
+      };
+    }
 
-  if (!result.success) {
-    return {
-      errors: result.error.flatten().fieldErrors,
-      message: "",
-    };
-  }
+    const data = result.data;
 
-  const data = result.data;
-
-  //检查用户名是否已经存在
-  const checkUser = async () => sql`
+    //检查用户名是否已经存在
+    const checkUser = async () => sql`
   SELECT * FROM users WHERE user_name = ${data.username};
   `;
-  const user = await checkUser();
-  if (user.rows.length) {
-    return {
-      errors: { username: ["用户名已存在"] },
-      message: "❌用户名已存在，注册失败",
-    };
-  }
 
-  const hashedPassword = await hashPassword(data.password);
+    const user = await checkUser();
+    if (user.rows.length) {
+      return {
+        errors: { username: ["用户名已存在"] },
+        message: "❌用户名已存在，注册失败",
+      };
+    }
 
-  const insert = async () => sql`
+    const hashedPassword = await hashPassword(data.password);
+    const insert = async () => sql`
   INSERT INTO users (user_name, email, password_hash) VALUES (${data.username}, ${data.email}, ${hashedPassword});
   `;
 
-  try {
     await insert();
   } catch (error) {
     console.log("error", error);
