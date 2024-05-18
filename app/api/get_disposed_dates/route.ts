@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     if (!userId)
       return NextResponse.json({ error: "用户未登录" }, { status: 401 });
     const result = await sql`
-    SELECT disposed_at
+    SELECT DISTINCT DATE(disposed_at) as disposed_at
     FROM disposed_items
     WHERE user_id = ${userId};`;
     const disposedDates = result.rows;
