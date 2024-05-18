@@ -38,7 +38,7 @@ const BubblesWrapper = () => {
         item_name: string;
       }[]
     | undefined = useMemo(() => {
-    return data?.items.map((item, index) => {
+    return data?.items?.map((item, index) => {
       return {
         item_id: item.item_id,
         gif: `/bubbles/${index % 3}.gif`,

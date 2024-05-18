@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import HomeSlogan from "../lib/HomeSlogan";
 
 export default function Home() {
   const info: {
@@ -52,13 +53,9 @@ export default function Home() {
   ];
   return (
     <main className="max-w-[450px] ">
-      <Image
-        className="-mt-4 self-end"
-        src={"/home_slogan.svg"}
-        height={82}
-        width={335}
-        alt="极减"
-      />
+      <div className="-mt-4 self-end">
+        <HomeSlogan />
+      </div>
       <section className="w-full bg-home-primary rounded-3xl p-2 mt-10 mb-20">
         <div className="-mt-8">
           {info.map((props, index) => (
