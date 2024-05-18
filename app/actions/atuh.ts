@@ -84,7 +84,21 @@ export async function login(prevState: LoginFormState, formData: FormData) {
     console.error("error", error);
     return { errors: {}, message: "登录失败，请稍后再试" };
   }
+
+  let is_new_user = false;
+  try {
+    const result =
+      await sql`SELECT is_new_user FROM users WHERE user_name = ${rawData.username};`;
+    is_new_user = result.rows[0].is_new_user;
+  } catch (error) {
+    console.error("error", error);
+  }
+
+  if (is_new_user) {
+    redirect("/my/about_us");
+  }
   redirect("/home");
+
   // return {
   //   errors: {},
   //   message: "✅登录成功",

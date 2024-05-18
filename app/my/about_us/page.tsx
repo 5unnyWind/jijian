@@ -1,9 +1,35 @@
 import { Badge } from "@/app/lib/Badge";
 import { Button } from "@/app/lib/Button";
+import { getUserId } from "@/app/lib/dal";
+import { sql } from "@vercel/postgres";
 import Link from "next/link";
+import { Suspense } from "react";
 
 const ColorText = ({ children }: { children: JSX.Element | string }) => {
   return <span className="text-bubble-primary">{children}</span>;
+};
+
+const BackLinkWithCheckNewUser = async () => {
+  try {
+    const user_id = await getUserId();
+    const result = await sql<{
+      is_new_user: boolean;
+    }>`SELECT is_new_user FROM users WHERE user_Id = ${user_id};`;
+    const is_new_user = result.rows[0].is_new_user;
+    sql`UPDATE users SET is_new_user = false WHERE user_id = ${user_id};`;
+    return (
+      <Button asChild className="w-full">
+        <Link href={is_new_user ? "/home" : "/my"}>我了解了</Link>
+      </Button>
+    );
+  } catch (error) {
+    console.error(error);
+    return (
+      <Button asChild className="w-full">
+        <Link href={"/my"}>我了解了</Link>
+      </Button>
+    );
+  }
 };
 
 export default function Page() {
@@ -38,9 +64,15 @@ export default function Page() {
         ，"极减"都是一个有力的工具，帮助用户实现这些目标，让人们的生活回归简单。
       </div>
       <div className="mt-4" />
-      <Button asChild className="w-full">
-        <Link href={"/my"}>我了解了</Link>
-      </Button>
+      <Suspense
+        fallback={
+          <Button asChild className="w-full">
+            <Link href={"/my"}>我了解了</Link>
+          </Button>
+        }
+      >
+        <BackLinkWithCheckNewUser />
+      </Suspense>
     </main>
   );
 }
