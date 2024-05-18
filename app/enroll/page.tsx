@@ -48,7 +48,7 @@ export default function Enroll() {
           <input
             name="username"
             type="text"
-            placeholder="账号：至少两位，中英文皆可"
+            placeholder="用户名：至少两位，中英文皆可"
             className="bg-transparent outline-none border-2 border-foreground w-full rounded-full p-1 pl-4"
             aria-describedby="username-error"
           />
