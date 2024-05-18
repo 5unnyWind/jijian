@@ -79,7 +79,7 @@ export async function login(prevState: LoginFormState, formData: FormData) {
     //   maxAge: 60 * 60 * 24 * 30,
     // });
 
-    await createSession(user.user_id.toString());
+    await createSession(String(user.user_id));
   } catch (error) {
     console.error("error", error);
     return { errors: {}, message: "登录失败，请稍后再试" };

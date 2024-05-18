@@ -42,9 +42,11 @@ export const LoginForm = () => {
         <input
           name="username"
           type="text"
-          placeholder="请输入账号"
+          placeholder="请输入用户名"
           className="bg-transparent outline-none border-2  border-foreground w-full rounded-full p-1 mb-2 pl-4"
         />
+        {/* fix ios 用户名无法输入中文的 bug。一个 input text 跟着一个 input password 会导致第一个框无法输入中文 */}
+        <input type="text" className="h-0 w-0" name="no_use" />
         <input
           name="password"
           type="password"

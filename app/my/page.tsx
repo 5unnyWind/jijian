@@ -8,28 +8,43 @@ import { Button } from "../lib/Button";
 import { logout } from "../actions/atuh";
 
 const DisposedDaysCount = async () => {
-  const userId = await getUserId();
-  const result = await sql`
-  SELECT DISTINCT DATE(disposed_at) as disposed_date
-  FROM disposed_items
-  WHERE user_id = ${userId};`;
-  return <span className="text-4xl">{result.rowCount}</span>;
+  try {
+    const userId = await getUserId();
+    const result = await sql`
+    SELECT DISTINCT DATE(disposed_at) as disposed_date
+    FROM disposed_items
+    WHERE user_id = ${userId};`;
+    return <span className="text-4xl">{result.rowCount}</span>;
+  } catch (error) {
+    console.log(error);
+    return <span></span>;
+  }
 };
 
 const DisposedItemsCount = async () => {
-  const userId = await getUserId();
-  const result = await sql`
-  SELECT COUNT(*) as disposed_items_count
-  FROM disposed_items
-  WHERE user_id = ${userId};`;
-  return (
-    <span className="text-4xl">{result.rows[0]?.disposed_items_count}</span>
-  );
+  try {
+    const userId = await getUserId();
+    const result = await sql`
+    SELECT COUNT(*) as disposed_items_count
+    FROM disposed_items
+    WHERE user_id = ${userId};`;
+    return (
+      <span className="text-4xl">{result.rows[0]?.disposed_items_count}</span>
+    );
+  } catch (error) {
+    console.log(error);
+    return <span></span>;
+  }
 };
 
 const UserName = async () => {
-  const user = await getUser();
-  return <span>{user?.user_name || ""}</span>;
+  try {
+    const user = await getUser();
+    return <span>{user?.user_name || ""}</span>;
+  } catch (error) {
+    console.log(error);
+    return <span></span>;
+  }
 };
 
 export default function Page() {
