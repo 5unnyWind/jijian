@@ -3,6 +3,7 @@ import { decrypt } from "@/app/lib/session";
 import { sql } from "@vercel/postgres";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 
 export async function POST(requet: NextRequest) {
   const body = await requet.json();
@@ -51,6 +52,8 @@ export async function POST(requet: NextRequest) {
       { status: 500 }
     );
   }
+  revalidatePath("/my");
+  revalidatePath("/home/calendar");
   return NextResponse.json(
     { message: "✅ 戳破了一个泡泡", success: true },
     { status: 200 }

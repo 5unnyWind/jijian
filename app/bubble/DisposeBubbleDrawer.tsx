@@ -93,7 +93,9 @@ const DisposeDrawer = forwardRef<
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="1" id="option-one" />
-                <Label className="accent-bubble-primary" htmlFor="option-one">丢弃</Label>
+                <Label className="accent-bubble-primary" htmlFor="option-one">
+                  丢弃
+                </Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="2" id="option-two" />

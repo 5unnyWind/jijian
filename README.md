@@ -13,4 +13,6 @@ npm run dev
 - [ ] motion_sense 展示形式
 - [ ] 小助手
 - [ ] 修改用户名
+- [ ] Tab动画
+- [ ] 找回密码
 

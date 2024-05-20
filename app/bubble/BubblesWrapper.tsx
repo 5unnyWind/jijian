@@ -103,7 +103,9 @@ const BubblesWrapper = () => {
         }
         ref={drawerTrigerRef}
         onSuccess={() => {
-          mutate("/api/get_items");
+          mutate("/api/get_items", {
+            items: data?.items?.filter((item) => item.item_id !== selectItem),
+          });
         }}
       />
     </>
