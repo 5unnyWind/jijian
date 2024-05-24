@@ -34,7 +34,7 @@ const BackLinkWithCheckNewUser = async () => {
 
 export default function Page() {
   return (
-    <main className="w-full font-semibold space-y-2">
+    <main className="w-full font-semibold space-y-2 max-w-[450px]">
       <div className=" text-3xl font-bold bg-text-gradient text-gradient -mb-6 opacity-40">
         ABOUT
       </div>
