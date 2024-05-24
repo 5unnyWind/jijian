@@ -24,6 +24,13 @@ export default function Calendar() {
   return (
     <main className="w-full">
       <Back />
+      <div
+        className="absolute min-h-screen w-screen left-0 top-0 -z-50 opacity-40"
+        style={{
+          backgroundImage: `url(/login_bg.png)`,
+          backgroundSize: "cover",
+        }}
+      />
       <Alert className="mt-10">
         <RocketIcon className="h-4 w-4" />
         <AlertTitle>30天断舍离挑战</AlertTitle>
@@ -44,6 +51,13 @@ export default function Calendar() {
           />
           <CalendarWrapper />
         </Suspense>
+        <Image
+          src={"/idle_items.png"}
+          height={141.3}
+          width={250}
+          alt="idle_items"
+          className="w-[250px] fixed -bottom-2 text-center"
+        />
       </div>
     </main>
   );
