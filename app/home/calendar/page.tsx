@@ -51,13 +51,6 @@ export default function Calendar() {
           />
           <CalendarWrapper />
         </Suspense>
-        <Image
-          src={"/idle_items.png"}
-          height={141.3}
-          width={250}
-          alt="idle_items"
-          className="w-[250px] fixed -bottom-2 text-center"
-        />
       </div>
     </main>
   );
