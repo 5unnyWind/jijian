@@ -3,7 +3,7 @@
 import * as React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
-
+import { zhCN } from "date-fns/locale";
 import { cn } from "@/app/lib/utils";
 import { buttonVariants } from "@/app/lib/Button";
 
@@ -17,6 +17,7 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
+      locale={zhCN}
       showOutsideDays={showOutsideDays}
       className={cn(" text-background", className)}
       classNames={{
@@ -50,7 +51,7 @@ function Calendar({
         day_range_start: "day-range-start",
         day_range_end: "day-range-end",
         day_selected: " bg-[#C59BF9] ",
-        day_today: "bg-accent border ",
+        day_today: " border ",
         day_outside:
           "day-outside text-muted-foreground opacity-50  aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30",
         day_disabled: "text-muted-foreground opacity-50",
