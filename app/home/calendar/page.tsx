@@ -7,6 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/app/lib/Alert";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { sql } from "@vercel/postgres";
 import { getUserId } from "@/app/lib/dal";
+import Image from "next/image";
 
 const HOST = process.env.NEXT_PUBLIC_HOST || "";
 
@@ -29,10 +30,18 @@ export default function Calendar() {
         <AlertDescription>正视需求，清理闲置，点亮日历</AlertDescription>
       </Alert>
 
-      <div className="flex flex-col items-center mt-10">
+      <div className="flex flex-col items-center mt-1 relative">
         <Suspense
-          fallback={<Skeleton className="w-[224px] h-[261px] border" />}
+          fallback={<Skeleton className="w-[330px] h-[427px] border mt-10" />}
         >
+          <Image
+            // className="absolute left-72 -top-6"
+            className="relative -left-24 top-6 z-30"
+            src={"/flower.svg"}
+            alt=""
+            width={53}
+            height={50}
+          />
           <CalendarWrapper />
         </Suspense>
       </div>
@@ -53,7 +62,7 @@ const CalendarWrapper = async () => {
       mode="multiple"
       selected={disposedDates}
       // onSelect={setDate}
-      className="rounded-md border"
+      className="w-[330px] h-[427px]"
     />
   );
 };
