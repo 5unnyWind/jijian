@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { Skeleton } from "../lib/Skeleton";
 import { sql } from "@vercel/postgres";
 import { Button } from "../lib/Button";
-import { logout } from "../actions/atuh";
+import { logout } from "../actions/auth";
 
 const DisposedDaysCount = async () => {
   try {

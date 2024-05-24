@@ -1,6 +1,6 @@
 "use client";
 import { useFormState, useFormStatus } from "react-dom";
-import { LoginFormState, login } from "./actions/atuh";
+import { LoginFormState, login } from "./actions/auth";
 import { useToast } from "./lib/toast/use-toast";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";

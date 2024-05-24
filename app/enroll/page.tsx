@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { EnrollState, enroll } from "../actions/atuh";
+import { EnrollState, enroll } from "../actions/auth";
 import Image from "next/image";
 import { useFormState, useFormStatus } from "react-dom";
 import { useActionState, useEffect } from "react";
