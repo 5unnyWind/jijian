@@ -28,7 +28,7 @@ export default function AddBubbleDrawer() {
         </div>
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="max-w-lg mx-auto">
           <DrawerTitle>添加一个泡泡?</DrawerTitle>
           <DrawerDescription>
             <span>（记录一项闲置物品）</span>
@@ -75,7 +75,7 @@ const AddBubbleForm = () => {
   }, [state]);
 
   return (
-    <div className="p-2 pl-6 pr-6">
+    <div className="p-2 pl-6 pr-6 w-full max-w-lg mx-auto">
       <form action={formAction}>
         <Label htmlFor="item_name">名称</Label>
         <Input

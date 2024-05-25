@@ -67,7 +67,7 @@ const DisposeDrawer = forwardRef<
         {triggerElement}
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="w-full max-w-lg mx-auto">
           <DrawerTitle>戳破一个泡泡?</DrawerTitle>
           <DrawerDescription>
             <span>(弃置一个闲置物品)</span>
