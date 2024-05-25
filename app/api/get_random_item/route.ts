@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
       await sql<Item>`SELECT * FROM idle_items WHERE user_id = ${userId} AND is_disposed = false`;
     const seed = +new Date().getDate() % result.rowCount;
     const todayItem = result.rows[seed];
-    console.log("todayItem", todayItem);
     return NextResponse.json({ success: true, item: todayItem });
   } catch (error) {
     console.log(error);

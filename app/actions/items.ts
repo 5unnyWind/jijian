@@ -12,7 +12,6 @@ export type ActionState = {
 export async function addItem(currentState: ActionState, formData: FormData) {
   try {
     const userId = (await verifySession()).userId;
-    console.log("userId", userId);
     if (!userId) {
       return {
         errors: {},

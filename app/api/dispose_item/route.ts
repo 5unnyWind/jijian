@@ -12,7 +12,6 @@ export async function POST(requet: NextRequest) {
   if (!user_id) {
     return NextResponse.json({ message: "请登录" }, { status: 401 });
   }
-  console.log("item_id", item_id);
   if (!item_id || !disposed_way) {
     return NextResponse.json(
       { message: "参数错误，稍后再试" },
