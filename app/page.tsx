@@ -8,14 +8,14 @@ export default function Home() {
       <div
         className="absolute min-h-screen w-screen left-0 top-0 -z-50 opacity-40"
         style={{
-          backgroundImage: `url(/login_bg.png)`,
+          backgroundImage: `url(/login_bg.avif)`,
           backgroundSize: "cover",
         }}
       />
       <LoginForm />
       <section>
         <Image
-          src={"/idle_items.png"}
+          src={"/idle_items.webp"}
           height={141.3}
           width={250}
           alt="idle_items"

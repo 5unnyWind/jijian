@@ -27,7 +27,7 @@ export default function Calendar() {
       <div
         className="absolute min-h-screen w-screen left-0 top-0 -z-50 opacity-40"
         style={{
-          backgroundImage: `url(/login_bg.png)`,
+          backgroundImage: `url(/login_bg.avif)`,
           backgroundSize: "cover",
         }}
       />
