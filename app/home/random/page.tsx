@@ -9,13 +9,14 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "@/app/lib/Skeleton";
 import Loading from "@/app/lib/Loading";
 
-const HOST = process.env.NEXT_PUBLIC_HOST;
+// const HOST = process.env.NEXT_PUBLIC_HOST;
 
-const getRandomItem: () => Promise<{
+const getRandomItem: (HOST: string) => Promise<{
   item?: Item;
   success?: boolean;
   error?: string;
-}> = async () => fetch(HOST + "/api/get_random_item").then((res) => res.json());
+}> = async (HOST) =>
+  fetch(HOST + "/api/get_random_item").then((res) => res.json());
 
 export default function Random() {
   const [item, setItem] = useState<Item | null>(null);
@@ -26,7 +27,8 @@ export default function Random() {
       setLoading(false);
       return;
     } else {
-      getRandomItem().then((data) => {
+      const HOST = window?.location?.origin;
+      getRandomItem(HOST).then((data) => {
         if (data.success && data.item) {
           setItem(data.item);
           setTodayItem(data.item);

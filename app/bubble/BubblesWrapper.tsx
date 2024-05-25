@@ -1,28 +1,39 @@
 "use client";
 
 import { Item } from "../interface";
-
 import Bubble from "./Bubble";
 import useSWR, { mutate } from "swr";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import DisposeDrawer from "./DisposeBubbleDrawer";
 import clsx from "clsx";
 import { useToast } from "../lib/toast/use-toast";
 
-const HOST = process.env.NEXT_PUBLIC_HOST || "";
-
-const fetcher = (url: string) => {
-  return fetch(HOST + url, {
-    credentials: "include",
-  }).then((res) => res.json());
-};
+// const HOST = process.env.NEXT_PUBLIC_HOST || "";
 
 const BubblesWrapper = () => {
+  const [host, setHost] = useState<string>("");
+
+  const fetcher = useCallback(
+    (url: string) => {
+      // if (!host) return Promise.resolve({ items: [] });
+      return fetch(host + url, {
+        credentials: "include",
+      }).then((res) => res.json());
+    },
+    [host]
+  );
+
   const { data, error, isLoading } = useSWR<{
     items: Item[];
     message?: string;
   }>("/api/get_items", fetcher);
+
+  useEffect(() => {
+    setHost(window?.location?.origin || "");
+    // mutate("/api/get_items");
+  }, []);
+
   const [selectItem, setSelectItem] = useState<number | null>(null);
 
   const drawerTrigerRef = useRef<HTMLButtonElement>(null);
