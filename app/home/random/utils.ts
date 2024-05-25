@@ -32,5 +32,5 @@ export function getTodayItem() {
     localStorage.removeItem("today_item"); // 如果数据过期，从localStorage中移除
     return null;
   }
-  return item.value;
+  return item;
 }
