@@ -114,7 +114,7 @@ export default function Assistant() {
       </div>
       {/* 空 div 作为滚动锚点 */}
       <div ref={endOfMessagesRef} />
-      <div className=" fixed bottom-10 flex w-11/12 items-center space-x-2 drop-shadow-lg max-w-[450px] left-1/2 -translate-x-1/2">
+      <div className=" fixed bottom-3 flex w-11/12 items-center space-x-2 drop-shadow-lg max-w-[450px] left-1/2 -translate-x-1/2">
         <Input
           ref={inputRef}
           className="rounded-full p-3 h-12 bg-background"
