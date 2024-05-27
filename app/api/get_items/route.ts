@@ -1,3 +1,4 @@
+import { Item } from "@/app/interface";
 import { getUserId } from "@/app/lib/dal";
 import { decrypt } from "@/app/lib/session";
 import { sql } from "@vercel/postgres";
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
     // }
     // const userId = (await decrypt(session))?.userId;
     const user_id = await getUserId();
-    const result = await sql`
+    const result = await sql<Item>`
     SELECT *
     FROM idle_items
     WHERE user_id = ${user_id} AND is_disposed = false;

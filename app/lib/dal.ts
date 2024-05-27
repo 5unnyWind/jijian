@@ -22,8 +22,11 @@ export const getUser = cache(async () => {
   if (!session) return null;
 
   try {
-    const data =
-      await sql`SELECT user_id,user_name,email FROM users WHERE user_id = ${session.userId}; `;
+    const data = await sql<{
+      user_id: number;
+      user_name: string;
+      email?: string;
+    }>`SELECT user_id,user_name,email FROM users WHERE user_id = ${session.userId}; `;
 
     const user = data.rows[0];
 
