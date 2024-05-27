@@ -3,8 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const someSql = async () => sql`
-  ALTER TABLE users
-  RENAME COLUMN username TO user_name;
+  DROP TABLE IF EXISTS pets; 
   `;
 
   try {

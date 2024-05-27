@@ -41,7 +41,10 @@ export default function Assistant() {
       ...messages,
       { role: "user", content: inputValue } as Message,
     ];
-    setMessages([...preMessages, { role: "assistant", content: "_" }]);
+    setMessages([
+      ...preMessages,
+      { role: "assistant", content: "(正在输入中...)" },
+    ]);
     try {
       const res = await fetch(location.origin + "/api/chat", {
         method: "POST",
@@ -69,12 +72,7 @@ export default function Assistant() {
           ]);
           break;
         }
-        curAnswer +=
-          decoder
-            .decode(value, { stream: true })
-            .match(/"([^"]+)"/g)
-            ?.map((match) => match.replace(/"/g, ""))
-            .join("") || "";
+        curAnswer += decoder.decode(value);
 
         setMessages([
           ...preMessages,

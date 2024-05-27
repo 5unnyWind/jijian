@@ -4,7 +4,7 @@ import { getUser } from "@/app/lib/dal";
 import { sql } from "@vercel/postgres";
 import { NextRequest } from "next/server";
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { CompletionUsage } from "ai";
 
 const client = new OpenAI({
   apiKey: process.env.MOONSHOT_API_KEY,
@@ -12,7 +12,7 @@ const client = new OpenAI({
 });
 
 export async function POST(request: NextRequest) {
-  const { messages } = await request.json();
+  const { messages }: { messages: Message[] } = await request.json();
   const userInfo = await getUser();
   const items = (
     await sql<Item>`
@@ -31,13 +31,46 @@ export async function POST(request: NextRequest) {
       )}`,
     },
   ];
-  const completion = await client.chat.completions.create({
+  const stream = await client.chat.completions.create({
     model: "moonshot-v1-8k",
     stream: true,
     messages: [...initialHistory, ...messages],
     temperature: 0.3,
   });
-  const stream = OpenAIStream(completion);
 
-  return new StreamingTextResponse(stream);
+  let completeMessage = "";
+
+  const encoder = new TextEncoder();
+  async function* makeIterator() {
+    // first send the OAI chunks
+    for await (const chunk of stream) {
+      const delta = chunk.choices[0].delta.content as string;
+      completeMessage += delta || "";
+      if (chunk.choices[0].finish_reason) {
+        //@ts-ignore
+        const usage: CompletionUsage = chunk.choices[0].usage;
+        sql`INSERT INTO chat (user_id, user_message, assistant_message, usage)
+        VALUES (${userInfo?.user_id}, ${
+          messages[messages.length - 1].content
+        }, ${completeMessage}, ${JSON.stringify(usage)});`;
+      }
+      yield encoder.encode(delta);
+    }
+    // optionally, some additional info can be sent here, like
+    // yield encoder.encode(JSON.stringify({ thread_id: thread._id }));
+  }
+  return new Response(iteratorToStream(makeIterator()));
+}
+
+function iteratorToStream(iterator: any) {
+  return new ReadableStream({
+    async pull(controller) {
+      const { value, done } = await iterator.next();
+      if (done) {
+        controller.close();
+      } else {
+        controller.enqueue(value);
+      }
+    },
+  });
 }
