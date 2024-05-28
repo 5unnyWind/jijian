@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Back from "../Back";
+import Back from "../../lib/Back";
 import RandomDrawerWrapper from "./RandomDrawerWrapper";
 import { Item } from "@/app/interface";
 import Link from "next/link";

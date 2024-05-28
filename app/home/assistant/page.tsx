@@ -1,6 +1,6 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/app/lib/Avatar";
-import Back from "../Back";
+import Back from "../../lib/Back";
 import { Input } from "@/app/lib/Input";
 import { Button } from "@/app/lib/Button";
 import Image from "next/image";
@@ -22,7 +22,6 @@ export default function Assistant() {
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isGenerating, setGenerating] = useState(false);
-  useEffect(() => {}, []);
   useEffect(() => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);

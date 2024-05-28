@@ -11,16 +11,12 @@ import clsx from "clsx";
 import { Skeleton } from "@/app/lib/Skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/app/lib/Alert";
 import { PlusIcon } from "@radix-ui/react-icons";
+import Back from "@/app/lib/Back";
 
 export default function Page() {
   return (
     <main className=" relative">
-      <Link
-        className="relative block z-50 bg-white w-8 h-8 p-1 rounded-full shadow-lg "
-        href={"/my"}
-      >
-        <Image src={"/back.svg"} alt="back" width={25} height={25} />
-      </Link>
+      <Back href="/my" />
       <Image
         className="-mt-10 -z-50"
         src="/discards_head.png"

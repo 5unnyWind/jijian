@@ -1,4 +1,4 @@
-import Back from "../Back";
+import Back from "../../lib/Back";
 import { Calendar as Calendar_cmp } from "@/app/lib/Calendar";
 import React, { Suspense } from "react";
 import { cookies } from "next/headers";
