@@ -13,6 +13,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/app/lib/Alert";
 import { PlusIcon } from "@radix-ui/react-icons";
 import Back from "@/app/lib/Back";
 
+const imgCount = 11;
+
 export default function Page() {
   return (
     <main className=" relative">
@@ -24,56 +26,7 @@ export default function Page() {
         width={382}
         height={129.3}
       />
-      <Suspense
-        fallback={
-          <>
-            <div className="flex flex-row justify-between items-center mt-4">
-              <div className="flex flex-col text-md font-semibold">
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-32 h-3 mt-1" />
-                <Skeleton className="w-24 h-3 mt-1" />
-              </div>
-              <Skeleton className="w-10 h-10" />
-            </div>
-            <Separator className="mt-1" />
-            <div className="flex flex-row justify-between items-center mt-4 opacity-80">
-              <div className="flex flex-col text-md font-semibold">
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-32 h-3 mt-1" />
-                <Skeleton className="w-24 h-3 mt-1" />
-              </div>
-              <Skeleton className="w-10 h-10" />
-            </div>
-            <Separator className="mt-1" />
-            <div className="flex flex-row justify-between items-center mt-4 opacity-60">
-              <div className="flex flex-col text-md font-semibold">
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-32 h-3 mt-1" />
-                <Skeleton className="w-24 h-3 mt-1" />
-              </div>
-              <Skeleton className="w-10 h-10" />
-            </div>
-            <Separator className="mt-1" />
-            <div className="flex flex-row justify-between items-center mt-4 opacity-40">
-              <div className="flex flex-col text-md font-semibold">
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-32 h-3 mt-1" />
-                <Skeleton className="w-24 h-3 mt-1" />
-              </div>
-              <Skeleton className="w-10 h-10" />
-            </div>
-            <Separator className="mt-1" />
-            <div className="flex flex-row justify-between items-center mt-4 opacity-20">
-              <div className="flex flex-col text-md font-semibold">
-                <Skeleton className="w-24 h-4" />
-                <Skeleton className="w-32 h-3 mt-1" />
-                <Skeleton className="w-24 h-3 mt-1" />
-              </div>
-              <Skeleton className="w-10 h-10" />
-            </div>
-          </>
-        }
-      >
+      <Suspense fallback={<SkeletonWrapper />}>
         <ListWrapper />
       </Suspense>
     </main>
@@ -88,11 +41,15 @@ const ListWrapper = async () => {
   JOIN idle_items ii ON di.item_id = ii.item_id
   WHERE di.user_id = ${user_id};
   `;
-  const disposed_list = result.rows.reverse();
+  const disposed_list = result.rows;
   return (
     <>
       {disposed_list.length ? (
-        disposed_list.map((item) => <Item key={item.item_id} item={item} />)
+        disposed_list
+          .map((item, index) => (
+            <Item key={item.item_id} item={item} index={index} />
+          ))
+          .reverse()
       ) : (
         <Link href={"/bubble"}>
           <Alert className="mt-10">
@@ -113,7 +70,13 @@ const DISPOSED_WAY: { [key: number]: string } = {
   3: "赠予",
 };
 
-const Item = ({ item }: { item: DisposedItem & { item_name: string } }) => {
+const Item = ({
+  item,
+  index,
+}: {
+  item: DisposedItem & { item_name: string };
+  index: number;
+}) => {
   const { item_name, disposed_at, disposed_way, moment_sense } = item;
   return (
     <>
@@ -136,9 +99,67 @@ const Item = ({ item }: { item: DisposedItem & { item_name: string } }) => {
           </div>
         </div>
         <div className="text-xs">{moment_sense}</div>
-        <div className="bg-my-primary rounded-lg w-10 h-10"></div>
+        <div className=" rounded-lg w-10 h-10">
+          <Image
+            src={`/animal_crossing/animalcrossing${
+              (index % imgCount) + 1
+            }.webp`}
+            width={40}
+            height={40}
+            alt="discards"
+          />
+        </div>
       </div>
       <Separator className="mt-1" />
     </>
   );
 };
+
+const SkeletonWrapper = () => (
+  <>
+    <div className="flex flex-row justify-between items-center mt-4">
+      <div className="flex flex-col text-md font-semibold">
+        <Skeleton className="w-24 h-4" />
+        <Skeleton className="w-32 h-3 mt-1" />
+        <Skeleton className="w-24 h-3 mt-1" />
+      </div>
+      <Skeleton className="w-10 h-10" />
+    </div>
+    <Separator className="mt-1" />
+    <div className="flex flex-row justify-between items-center mt-4 opacity-80">
+      <div className="flex flex-col text-md font-semibold">
+        <Skeleton className="w-24 h-4" />
+        <Skeleton className="w-32 h-3 mt-1" />
+        <Skeleton className="w-24 h-3 mt-1" />
+      </div>
+      <Skeleton className="w-10 h-10" />
+    </div>
+    <Separator className="mt-1" />
+    <div className="flex flex-row justify-between items-center mt-4 opacity-60">
+      <div className="flex flex-col text-md font-semibold">
+        <Skeleton className="w-24 h-4" />
+        <Skeleton className="w-32 h-3 mt-1" />
+        <Skeleton className="w-24 h-3 mt-1" />
+      </div>
+      <Skeleton className="w-10 h-10" />
+    </div>
+    <Separator className="mt-1" />
+    <div className="flex flex-row justify-between items-center mt-4 opacity-40">
+      <div className="flex flex-col text-md font-semibold">
+        <Skeleton className="w-24 h-4" />
+        <Skeleton className="w-32 h-3 mt-1" />
+        <Skeleton className="w-24 h-3 mt-1" />
+      </div>
+      <Skeleton className="w-10 h-10" />
+    </div>
+    <Separator className="mt-1" />
+    <div className="flex flex-row justify-between items-center mt-4 opacity-20">
+      <div className="flex flex-col text-md font-semibold">
+        <Skeleton className="w-24 h-4" />
+        <Skeleton className="w-32 h-3 mt-1" />
+        <Skeleton className="w-24 h-3 mt-1" />
+      </div>
+      <Skeleton className="w-10 h-10" />
+    </div>
+  </>
+);
