@@ -36,6 +36,7 @@ export async function POST(request: NextRequest) {
     stream: true,
     messages: [...initialHistory, ...messages],
     temperature: 0.3,
+    max_tokens: 4096,
   });
 
   let completeMessage = "";
