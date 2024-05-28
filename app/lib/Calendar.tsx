@@ -17,6 +17,9 @@ function Calendar({
 }: CalendarProps) {
   return (
     <DayPicker
+      onDayClick={(day) => {
+        console.log(day);
+      }}
       locale={zhCN}
       showOutsideDays={showOutsideDays}
       className={cn(" text-background", className)}

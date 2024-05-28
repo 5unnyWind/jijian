@@ -1,24 +1,12 @@
 import Back from "../../lib/Back";
-import { Calendar as Calendar_cmp } from "@/app/lib/Calendar";
 import React, { Suspense } from "react";
-import { cookies } from "next/headers";
 import { Skeleton } from "@/app/lib/Skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/app/lib/Alert";
 import { RocketIcon } from "@radix-ui/react-icons";
 import { sql } from "@vercel/postgres";
 import { getUserId } from "@/app/lib/dal";
 import Image from "next/image";
-
-const HOST = process.env.NEXT_PUBLIC_HOST || "";
-
-const getDisposedDates: () => Promise<{
-  disposedDates: { disposed_at: string }[];
-}> = () =>
-  fetch(HOST + "/api/get_disposed_dates", {
-    headers: {
-      Cookie: cookies().toString(),
-    },
-  }).then((res) => res.json());
+import CalendarWithPopover from "./CalendarWithPopover";
 
 export default function Calendar() {
   return (
@@ -56,20 +44,25 @@ export default function Calendar() {
   );
 }
 
+export type DisposedData = {
+  item_id: number; // 物品ID
+  item_name: string; // 物品名称
+  item_count: number; // 物品数量
+  disposed_way: string; // 处置方式
+  disposed_at: Date; // 处置时间
+};
 const CalendarWrapper = async () => {
   const userId = await getUserId();
-  const result = await sql<{ disposed_at: Date }>`
-  SELECT DISTINCT DATE(disposed_at) as disposed_at
-  FROM disposed_items
-  WHERE user_id = ${userId};`;
-  const disposedDates = result.rows.map((row) => row.disposed_at);
+  const result = await sql<DisposedData>`
+  SELECT di.item_id,
+       ii.item_name,
+       ii.item_count,
+       di.disposed_way,
+       di.disposed_at
+  FROM disposed_items di
+  JOIN idle_items ii ON di.item_id = ii.item_id
+  WHERE di.user_id = ${userId};`;
+  const data = result.rows;
 
-  return (
-    <Calendar_cmp
-      mode="multiple"
-      selected={disposedDates}
-      // onSelect={setDate}
-      className="w-[330px] h-[427px]"
-    />
-  );
+  return <CalendarWithPopover disposedData={data} />;
 };
