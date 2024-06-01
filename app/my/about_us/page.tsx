@@ -1,9 +1,11 @@
 import { Badge } from "@/app/lib/Badge";
 import { Button } from "@/app/lib/Button";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/app/lib/Drawer";
 import { getUserId } from "@/app/lib/dal";
 import { sql } from "@vercel/postgres";
 import Link from "next/link";
 import { Suspense } from "react";
+import PrivacyPolicy from "./PrivacyPolicy";
 
 const ColorText = ({ children }: { children: JSX.Element | string }) => {
   return <span className="text-bubble-primary">{children}</span>;
@@ -63,7 +65,20 @@ export default function Page() {
         <ColorText>更多的空间、更多的时间，还是更多的心灵平静</ColorText>
         ，"极减"都是一个有力的工具，帮助用户实现这些目标，让人们的生活回归简单。
       </div>
-      <div className="mt-4" />
+      <div className="pt-2" />
+      <div className="text-xs font-normal opacity-80">
+        开始使用即代表你同意
+        <Drawer>
+          <DrawerTrigger className="underline text-bubble-primary">
+            隐私政策及用户协议
+          </DrawerTrigger>
+          <DrawerContent>
+            <div className="h-[60vh] max-w-lg p-2 overflow-auto">
+              <PrivacyPolicy />
+            </div>
+          </DrawerContent>
+        </Drawer>
+      </div>
       <Suspense
         fallback={
           <Button asChild className="w-full">
@@ -73,7 +88,6 @@ export default function Page() {
       >
         <BackLinkWithCheckNewUser />
       </Suspense>
-
       <div className="text-xs text-center text-background-end  mt-4 ">
         DEV. tf , UI wj , PM lj
       </div>

@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 /* #212121 == rgb(33,33,33) */
+
 :root {
   --foreground-rgb: 33, 33, 33;
   --background-rgb: 255, 254, 250;
