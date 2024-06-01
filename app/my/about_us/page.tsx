@@ -73,7 +73,7 @@ export default function Page() {
             隐私政策及用户协议
           </DrawerTrigger>
           <DrawerContent>
-            <div className="h-[60vh] max-w-lg p-2 overflow-auto">
+            <div className="h-[60vh] max-w-lg p-2 overflow-auto mx-auto">
               <PrivacyPolicy />
             </div>
           </DrawerContent>
