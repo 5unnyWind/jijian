@@ -133,7 +133,7 @@ export async function enroll(
       password: z
         .string()
         .min(1, { message: "密码不能为空" })
-        .min(8, { message: "密码至少需要8个字符" })
+        .min(6, { message: "密码至少需要6个字符" })
         .max(20, { message: "密码太长了" }),
       confirm_password: z.string(),
     })

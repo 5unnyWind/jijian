@@ -72,7 +72,7 @@ export default function Enroll() {
           <input
             name="password"
             type="password"
-            placeholder="密码：至少8位"
+            placeholder="密码：至少6位"
             className="mt-2 bg-transparent outline-none border-2  border-foreground w-full rounded-full p-1 pl-4"
             aria-describedby="password-error"
           />
